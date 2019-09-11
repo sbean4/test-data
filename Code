@@ -16,3 +16,6 @@ xlapp.Quit()
 # Make sure Excel completely closes
 del xlbook
 del xlapp
+
+
+df['Inspection_Type'] = df['Descriptive Narrative'].str.extract('(\d+)')
