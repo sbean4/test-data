@@ -1,0 +1,18 @@
+import win32com.client as win32
+
+xlapp = win32.DispatchEx('Excel.Application')
+xlapp.DisplayAlerts = False
+xlapp.Visible = True
+
+xlbook = xlapp.Workbooks.Open('Testsample1.xlsx')
+
+# Refresh all pivot tables
+xlbook.RefreshAll()
+
+xlbook.Save()
+xlbook.Close()
+xlapp.Quit()
+
+# Make sure Excel completely closes
+del xlbook
+del xlapp
