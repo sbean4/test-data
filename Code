@@ -38,3 +38,6 @@ for i in range(len(entry)):
     chunk = entry[i:i+7]
     if isSerialNumber(chunk):
         print(chunk)
+
+
+df['Test'] = df['Corr Act'].str.extract('(\dTH\d\d\d\d)')
