@@ -41,3 +41,8 @@ for i in range(len(entry)):
 
 
 df['Test'] = df['Corr Act'].str.extract('(\dTH\d\d\d\d)')
+
+for row in range(len(df.columns)-1): # loop till last but one column
+        df1.iloc[:,row] = df.iloc[:,row+1]   # each column gets values of next column
+
+df1[row+1] = np.nan  
