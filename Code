@@ -46,3 +46,26 @@ for row in range(len(df.columns)-1): # loop till last but one column
         df1.iloc[:,row] = df.iloc[:,row+1]   # each column gets values of next column
 
 df1[row+1] = np.nan  
+
+
+import xlrd
+import csv
+import numpy as np
+import pandas as pd
+
+xls = pd.ExcelFile('ETR_TEST-Single.xlsx')
+
+df = xls.parse(index_col=None, na_values=['NA'])
+df['ETR Date'] = pd.to_datetime(df['ETR Date'].dt.strftime('%m/%d/%Y'))
+df['Date'] = df['ETR Date']
+
+df.set_index(pd.DatetimeIndex(df.Date),inplace=True)
+#make dates the index
+df.set_index(pd.DatetimeIndex(df.Date), inplace=True)
+#fill the gaps
+df = df.resample('D',fill_method='ffill')
+#fix the Date column
+df.Date = df.index.values
+
+#Drop the Perf_Test column and save to csv
+df.to_csv('9113162.csv', index = False)
