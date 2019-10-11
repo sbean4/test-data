@@ -67,5 +67,9 @@ df = df.resample('D',fill_method='ffill')
 #fix the Date column
 df.Date = df.index.values
 
+df = df.groupby('Eng SerNo').apply(lambda x : x.set_index('Date')
+                                          .resample('D')
+                                          .ffill())
+
 #Drop the Perf_Test column and save to csv
 df.to_csv('9113162.csv', index = False)
